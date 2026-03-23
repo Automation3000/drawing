@@ -21,6 +21,16 @@
     <link rel="stylesheet" type="text/css" href="styles/grapheditor.css">
 	<link rel="stylesheet" media="(forced-colors: active)" href="styles/high-contrast.css" id="high-contrast-stylesheet">
 	<script src="js/bootstrap.js"></script>
+	<script>
+  // Forcefully change logo link and title
+  setInterval(function() {
+    var logo = document.querySelector('.geAppIcon');
+    if (logo) {
+      logo.setAttribute('href', 'https://draw.automation3000.com');
+      logo.setAttribute('title', 'Drawing - Personal Tool');
+    }
+  }, 1000);
+</script>
 	<style type="text/css">
 		.geBlock {
 			z-index:-3;
