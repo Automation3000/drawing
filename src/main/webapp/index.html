@@ -42,6 +42,23 @@
                 item.style.display = 'none';
             });
             
+            // Hide "Open from" menu items
+            var openFromItems = document.querySelectorAll('[title*="Open from"]');
+            openFromItems.forEach(function(item) {
+                item.style.display = 'none';
+            });
+            
+            // Hide any element with "Open from" text content
+            var allMenuItems = document.querySelectorAll('.geMenuItem');
+            allMenuItems.forEach(function(el) {
+                if (el.textContent && el.textContent.includes('Open from')) {
+                    el.style.display = 'none';
+                    if (el.parentElement) {
+                        el.parentElement.style.display = 'none';
+                    }
+                }
+            });
+            
             // Hide any element with "Files" text content
             var allElements = document.querySelectorAll('[title*="Files"], [title*="File"]');
             allElements.forEach(function(el) {
@@ -117,6 +134,22 @@
         /* Hide generic "More" links in File menu that might contain online options  */
         .geMenuItem[data-action="export"],
         .geMenuItem[id*="Share"] {
+            display: none !important;
+        }
+
+        /* ----- HIDE OPEN FROM MENU ----- */
+        
+        /* Hide "Open from" menu item and its submenu */
+        .geMenuItem[title*="Open from"],
+        .geMenuItem[title="Open from"],
+        div[title*="Open from"],
+        span[title*="Open from"],
+        li:has-text("Open from") {
+            display: none !important;
+        }
+
+        /* Hide "Open from" submenu items generically */
+        .geMenu .geMenuItem:nth-child(2) {
             display: none !important;
         }
 
