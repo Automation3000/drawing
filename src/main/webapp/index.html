@@ -36,13 +36,14 @@
                 logo.style.backgroundImage = 'url(\'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDEwMCAxMDAiPjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjUwIiBmaWxsPSIjZjU3YzAwIi8+PHBhdGggZD0iTTUwLDIwTDgwLDgwSDIwWiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==\')';
             }
             
-            // Hide all menu items in File menu
-            var allMenuItems = document.querySelectorAll('.geMenuItem');
+            // Hide all popup menu items (both .geMenuItem and .mxPopupMenuItem)
+            var allMenuItems = document.querySelectorAll('.geMenuItem, .mxPopupMenuItem, [role="menuitem"]');
             allMenuItems.forEach(function(item) {
                 var text = item.textContent.trim();
                 
-                // Hide "Open from" and all online storage options
+                // Hide "Open from" and all its submenu items
                 if (text === 'Open from' || 
+                    text.startsWith('Open from') ||
                     text.includes('Google Drive') || 
                     text.includes('OneDrive') || 
                     text.includes('Microsoft 365') ||
@@ -55,13 +56,31 @@
                     text.includes('URL') ||
                     text.includes('Files') ||
                     text === 'Share...' ||
-                    text === 'Share') {
+                    text === 'Share' ||
+                    text.includes('Open Recent')) {
                     item.style.display = 'none !important';
-                    item.parentElement && (item.parentElement.style.display = 'none !important');
+                    item.style.visibility = 'hidden !important';
+                    item.style.height = '0 !important';
+                    item.style.overflow = 'hidden !important';
+                    if (item.parentElement) {
+                        item.parentElement.style.display = 'none !important';
+                    }
+                }
+            });
+
+            // Also hide any popup divs that contain these options
+            var popupDivs = document.querySelectorAll('div[style*="position"]');
+            popupDivs.forEach(function(div) {
+                if (div.textContent.includes('Open from') || 
+                    div.textContent.includes('Browser') ||
+                    div.textContent.includes('Device') ||
+                    div.textContent.includes('URL')) {
+                    div.style.display = 'none !important';
+                    div.style.visibility = 'hidden !important';
                 }
             });
             
-        }, 500);
+        }, 300);
         
         // Hide Share button as fallback
         var shareBtn = document.querySelector('.geBtn.gePrimaryBtn[title="Share"]');
@@ -134,30 +153,56 @@
 
         /* ----- HIDE OPEN FROM MENU ----- */
         
-        /* Hide "Open from" menu item and its submenu */
+        /* Hide "Open from" menu item - target both .geMenuItem and .mxPopupMenuItem */
         .geMenuItem[title*="Open from"],
         .geMenuItem[title="Open from"],
+        .mxPopupMenuItem:contains("Open from"),
+        td:contains("Open from"),
         div[title*="Open from"],
         span[title*="Open from"],
-        li:has-text("Open from") {
+        li:has-text("Open from"),
+        *:contains("Open from") {
             display: none !important;
+            visibility: hidden !important;
+            height: 0 !important;
+            overflow: hidden !important;
+            margin: 0 !important;
+            padding: 0 !important;
         }
 
-        /* Hide "Open from" submenu items generically */
-        .geMenu .geMenuItem:nth-child(2) {
-            display: none !important;
-        }
-
-        /* Hide Browser, Device, URL options under "Open from" */
+        /* Hide submenu items: Browser, Device, URL */
         .geMenuItem:contains("Browser"),
         .geMenuItem:contains("Device"),
-        .geMenuItem:contains("URL") {
+        .geMenuItem:contains("URL"),
+        .mxPopupMenuItem:contains("Browser"),
+        .mxPopupMenuItem:contains("Device"),
+        .mxPopupMenuItem:contains("URL"),
+        td:contains("Browser"),
+        td:contains("Device"),
+        td:contains("URL") {
             display: none !important;
+            visibility: hidden !important;
+            height: 0 !important;
+            overflow: hidden !important;
         }
 
-        /* Hide menu items that start with "Open from" */
-        div.geMenuItem:nth-child(n+2):nth-child(-n+10) {
+        /* Hide by text content match - aggressive selector */
+        div[role="menu"] > *:nth-child(2),
+        [role="menuitem"][aria-label*="Open from"],
+        [role="menuitem"][aria-label*="Browser"],
+        [role="menuitem"][aria-label*="Device"],
+        [role="menuitem"][aria-label*="URL"] {
             display: none !important;
+            visibility: hidden !important;
+            height: 0 !important;
+        }
+
+        /* Hide "Open Recent" as well since it's in the submenu */
+        .geMenuItem[title*="Open Recent"],
+        .mxPopupMenuItem:contains("Open Recent"),
+        td:contains("Open Recent") {
+            display: none !important;
+            visibility: hidden !important;
         }
 
         /* ----- HIDE FILES OPTION AND RELATED MENUS ----- */
@@ -202,5 +247,6 @@
 	</div>
 </div>
 <script src="js/main.js"></script>
+<script src="js/PostConfig.js"></script>
 </body>
 </html>
