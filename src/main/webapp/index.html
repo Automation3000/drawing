@@ -35,6 +35,20 @@
                 // Ensure background-image override is applied with orange icon
                 logo.style.backgroundImage = 'url(\'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDEwMCAxMDAiPjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjUwIiBmaWxsPSIjZjU3YzAwIi8+PHBhdGggZD0iTTUwLDIwTDgwLDgwSDIwWiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==\')';
             }
+            
+            // Hide Files menu items and buttons
+            var filesItems = document.querySelectorAll('[title*="Files"], [title*="File"], .geMenuItem[data-action*="file"]');
+            filesItems.forEach(function(item) {
+                item.style.display = 'none';
+            });
+            
+            // Hide any element with "Files" text content
+            var allElements = document.querySelectorAll('[title*="Files"], [title*="File"]');
+            allElements.forEach(function(el) {
+                if (el.textContent && (el.textContent.includes('Files') || el.textContent.includes('File'))) {
+                    el.style.display = 'none';
+                }
+            });
         }, 500);
         
         // Hide Share button as fallback
@@ -103,6 +117,32 @@
         /* Hide generic "More" links in File menu that might contain online options  */
         .geMenuItem[data-action="export"],
         .geMenuItem[id*="Share"] {
+            display: none !important;
+        }
+
+        /* ----- HIDE FILES OPTION AND RELATED MENUS ----- */
+        
+        /* Hide Files menu item by title and text content */
+        .geMenuItem[title*="Files"],
+        .geMenuItem[title*="File"],
+        div[title*="Files"],
+        span[title*="Files"],
+        button[title*="Files"] {
+            display: none !important;
+        }
+
+        /* Hide any menu items that might contain file operations */
+        .geMenuItem[data-action*="file"],
+        .geMenuItem[data-action*="import"],
+        .geMenuItem[data-action*="open"] {
+            display: none !important;
+        }
+
+        /* Alternative selectors for Files menu */
+        .geName[title*="Files"],
+        .geName[title*="File"],
+        .geLabel[title*="Files"],
+        div:has-text("Files") {
             display: none !important;
         }
 
