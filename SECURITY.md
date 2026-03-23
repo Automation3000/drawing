@@ -2,13 +2,14 @@
 
 ## Supported Versions
 
-We only accept security reports against the latest version in this repo or the version deployed to app.diagrams.net, if different.
+This is a private, single-user fork created specifically for personal plant drawings and instrumentation diagrams. There are no publicly supported versions, and no regular security updates or patches are guaranteed for public users.
 
 ## Reporting a Vulnerability
 
-Report at https://huntr.dev/bounties/disclose?target=https%3A%2F%2Fgithub.com%2Fjgraph%2Fdrawio&validSearch=true. There is a bug bounty program in place there.
+As this is a personal workspace hosted at `draw.Automation3000.com` and not a public commercial service, there is no bug bounty program and we do not accept vulnerability reports or security PRs. 
 
-## Out of scope
+If you discover a security vulnerability in the core drawing engine, please report it directly to the upstream original repository maintainers (`jgraph/drawio`) according to their official security policy.
 
-- Issues relating to the PlantUML integration.
-- Issues relating to the www.drawio.com web site.
+## Out of Scope
+
+Everything is out of scope for this specific repository. This is an unmaintained personal fork, and no external security audits or reports will be reviewed.
