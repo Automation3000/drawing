@@ -21,7 +21,9 @@ window.DRAWIO_CONFIG = {
     disableDropbox: true,
     disableTrello: true,
     disableFileSync: true,
-    disableExport: false  // Allow local export but hide file operations
+    disableExport: false,  // Allow local export but hide file operations
+    disableImport: false,  // Keep import but via local browser only
+    openFile: false        // Disable "Open from" cloud services
 };
 
 if (typeof urlParams !== 'undefined') {
