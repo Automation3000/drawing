@@ -23,7 +23,9 @@ window.DRAWIO_CONFIG = {
     disableFileSync: true,
     disableExport: false,  // Allow local export but hide file operations
     disableImport: false,  // Keep import but via local browser only
-    openFile: false        // Disable "Open from" cloud services
+    openFile: false,       // Disable "Open from" cloud services
+    browser: true,         // Force browser-only mode
+    noFileMenu: false      // Keep basic file menu but clean it up
 };
 
 if (typeof urlParams !== 'undefined') {
