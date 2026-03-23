@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Drawing</title>
+    <title>Drawing - Personal Tool</title>
     <meta charset="utf-8">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="Description" content="Personal diagram software for making Plant Drawings, P&ID, and control loops">
@@ -24,18 +24,25 @@
 	<script src="js/PreConfig.js"></script>
 
 	<script>
-        // Forcefully change logo link and title
-        setInterval(function() {
+        // Comprehensive branding and UI cleanup script
+        var cleanupInterval = setInterval(function() {
             var logo = document.querySelector('.geAppIcon');
             if (logo) {
+                // Update logo href and title
                 logo.setAttribute('href', 'https://draw.automation3000.com');
-                logo.setAttribute('title', 'Drawing - Personal Tool');
+                logo.setAttribute('title', 'Drawing');
+                
+                // Ensure background-image override is applied with orange icon
+                logo.style.backgroundImage = 'url(\'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDEwMCAxMDAiPjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjUwIiBmaWxsPSIjZjU3YzAwIi8+PHBhdGggZD0iTTUwLDIwTDgwLDgwSDIwWiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==\')';
             }
-            
-            // Forcefully hide Share button in Top bar if CSS fails
-            var shareBtn = document.querySelector('.geBtn.gePrimaryBtn[title="Share"]');
-            if(shareBtn) { shareBtn.style.display = 'none'; }
-        }, 1000);
+        }, 500);
+        
+        // Hide Share button as fallback
+        var shareBtn = document.querySelector('.geBtn.gePrimaryBtn[title="Share"]');
+        if(shareBtn) { shareBtn.style.display = 'none'; }
+        
+        // Stop the interval after 30 seconds to avoid continuous polling
+        setTimeout(function() { clearInterval(cleanupInterval); }, 30000);
     </script>
 
 	<style type="text/css">
@@ -53,10 +60,29 @@
 			padding-top:0px;
 		}
 
+        /* ----- LOGO AND BRANDING OVERRIDES ----- */
+        
+        /* Replace draw.io logo with custom orange diagram icon */
+        .geAppIcon {
+            background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDEwMCAxMDAiPjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjUwIiBmaWxsPSIjZjU3YzAwIi8+PHBhdGggZD0iTTUwLDIwTDgwLDgwSDIwWiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==') !important;
+            background-size: cover !important;
+            background-repeat: no-repeat !important;
+            background-position: center !important;
+        }
+
+        /* Hide draw.io branding elements in header/title bars */
+        div[title*="draw.io"],
+        span[title*="draw.io"] {
+            display: none !important;
+        }
+
         /* ----- HIDE UNWANTED MENUS AND BUTTONS ----- */
         
         /* Hide Top Share Button */
-        .geBtn.gePrimaryBtn[title="Share"] { display: none !important; }
+        .geBtn.gePrimaryBtn[title="Share"],
+        .geBtn[title="Share"] {
+            display: none !important;
+        }
         
         /* Hide Cloud/Online options from all dropdowns based on text/class */
         .geMenuItem[title="Google Drive..."],
@@ -70,7 +96,15 @@
         }
 
         /* Hide the Share option from File Menu */
-        .geMenuItem[title="Share..."] { display: none !important; }
+        .geMenuItem[title="Share..."] {
+            display: none !important;
+        }
+
+        /* Hide generic "More" links in File menu that might contain online options  */
+        .geMenuItem[data-action="export"],
+        .geMenuItem[id*="Share"] {
+            display: none !important;
+        }
 
 	</style>
 </head>
