@@ -19,7 +19,9 @@ window.DRAWIO_CONFIG = {
     disableGitHub: true,
     disableGitLab: true,
     disableDropbox: true,
-    disableTrello: true
+    disableTrello: true,
+    disableFileSync: true,
+    disableExport: false  // Allow local export but hide file operations
 };
 
 if (typeof urlParams !== 'undefined') {
