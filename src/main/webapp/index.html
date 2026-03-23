@@ -21,16 +21,35 @@
     <link rel="stylesheet" type="text/css" href="styles/grapheditor.css">
 	<link rel="stylesheet" media="(forced-colors: active)" href="styles/high-contrast.css" id="high-contrast-stylesheet">
 	<script src="js/bootstrap.js"></script>
+
+    <script>
+        window.DRAWIO_BASE_URL = window.location.protocol + '//' + window.location.host;
+        window.DRAWIO_CONFIG = {
+            defaultMode: 'browser', // Force local mode
+            disableGoogleDrive: true,
+            disableOneDrive: true,
+            disableGitHub: true,
+            disableGitLab: true,
+            disableDropbox: true,
+            disableTrello: true
+        };
+    </script>
+
 	<script>
-  // Forcefully change logo link and title
-  setInterval(function() {
-    var logo = document.querySelector('.geAppIcon');
-    if (logo) {
-      logo.setAttribute('href', 'https://draw.automation3000.com');
-      logo.setAttribute('title', 'Drawing - Personal Tool');
-    }
-  }, 1000);
-</script>
+        // Forcefully change logo link and title
+        setInterval(function() {
+            var logo = document.querySelector('.geAppIcon');
+            if (logo) {
+                logo.setAttribute('href', 'https://draw.automation3000.com');
+                logo.setAttribute('title', 'Drawing - Personal Tool');
+            }
+            
+            // Forcefully hide Share button in Top bar if CSS fails
+            var shareBtn = document.querySelector('.geBtn.gePrimaryBtn[title="Share"]');
+            if(shareBtn) { shareBtn.style.display = 'none'; }
+        }, 1000);
+    </script>
+
 	<style type="text/css">
 		.geBlock {
 			z-index:-3;
@@ -45,6 +64,26 @@
 			margin-top:0px;
 			padding-top:0px;
 		}
+
+        /* ----- HIDE UNWANTED MENUS AND BUTTONS ----- */
+        
+        /* Hide Top Share Button */
+        .geBtn.gePrimaryBtn[title="Share"] { display: none !important; }
+        
+        /* Hide Cloud/Online options from all dropdowns based on text/class */
+        .geMenuItem[title="Google Drive..."],
+        .geMenuItem[title="OneDrive..."],
+        .geMenuItem[title="Microsoft 365..."],
+        .geMenuItem[title="Dropbox..."],
+        .geMenuItem[title="GitHub..."],
+        .geMenuItem[title="GitLab..."],
+        .geMenuItem[title="Trello..."] {
+            display: none !important;
+        }
+
+        /* Hide the Share option from File Menu */
+        .geMenuItem[title="Share..."] { display: none !important; }
+
 	</style>
 </head>
 <body class="geEditor geClassic">
