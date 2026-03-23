@@ -36,36 +36,31 @@
                 logo.style.backgroundImage = 'url(\'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDEwMCAxMDAiPjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjUwIiBmaWxsPSIjZjU3YzAwIi8+PHBhdGggZD0iTTUwLDIwTDgwLDgwSDIwWiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==\')';
             }
             
-            // Hide Files menu items and buttons
-            var filesItems = document.querySelectorAll('[title*="Files"], [title*="File"], .geMenuItem[data-action*="file"]');
-            filesItems.forEach(function(item) {
-                item.style.display = 'none';
-            });
-            
-            // Hide "Open from" menu items
-            var openFromItems = document.querySelectorAll('[title*="Open from"]');
-            openFromItems.forEach(function(item) {
-                item.style.display = 'none';
-            });
-            
-            // Hide any element with "Open from" text content
+            // Hide all menu items in File menu
             var allMenuItems = document.querySelectorAll('.geMenuItem');
-            allMenuItems.forEach(function(el) {
-                if (el.textContent && el.textContent.includes('Open from')) {
-                    el.style.display = 'none';
-                    if (el.parentElement) {
-                        el.parentElement.style.display = 'none';
-                    }
+            allMenuItems.forEach(function(item) {
+                var text = item.textContent.trim();
+                
+                // Hide "Open from" and all online storage options
+                if (text === 'Open from' || 
+                    text.includes('Google Drive') || 
+                    text.includes('OneDrive') || 
+                    text.includes('Microsoft 365') ||
+                    text.includes('Dropbox') ||
+                    text.includes('GitHub') ||
+                    text.includes('GitLab') ||
+                    text.includes('Trello') ||
+                    text.includes('Browser') ||
+                    text.includes('Device') ||
+                    text.includes('URL') ||
+                    text.includes('Files') ||
+                    text === 'Share...' ||
+                    text === 'Share') {
+                    item.style.display = 'none !important';
+                    item.parentElement && (item.parentElement.style.display = 'none !important');
                 }
             });
             
-            // Hide any element with "Files" text content
-            var allElements = document.querySelectorAll('[title*="Files"], [title*="File"]');
-            allElements.forEach(function(el) {
-                if (el.textContent && (el.textContent.includes('Files') || el.textContent.includes('File'))) {
-                    el.style.display = 'none';
-                }
-            });
         }, 500);
         
         // Hide Share button as fallback
@@ -150,6 +145,18 @@
 
         /* Hide "Open from" submenu items generically */
         .geMenu .geMenuItem:nth-child(2) {
+            display: none !important;
+        }
+
+        /* Hide Browser, Device, URL options under "Open from" */
+        .geMenuItem:contains("Browser"),
+        .geMenuItem:contains("Device"),
+        .geMenuItem:contains("URL") {
+            display: none !important;
+        }
+
+        /* Hide menu items that start with "Open from" */
+        div.geMenuItem:nth-child(n+2):nth-child(-n+10) {
             display: none !important;
         }
 
