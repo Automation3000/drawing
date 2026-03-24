@@ -43,7 +43,6 @@
                 
                 // Hide "Open from" and all its submenu items
                 if (text === 'Open from' || 
-                    text.startsWith('Open from') ||
                     text.includes('Google Drive') || 
                     text.includes('OneDrive') || 
                     text.includes('Microsoft 365') ||
@@ -51,10 +50,6 @@
                     text.includes('GitHub') ||
                     text.includes('GitLab') ||
                     text.includes('Trello') ||
-                    text.includes('Browser') ||
-                    text.includes('Device') ||
-                    text.includes('URL') ||
-                    text.includes('Files') ||
                     text === 'Share...' ||
                     text === 'Share' ||
                     text.includes('Open Recent')) {
@@ -73,8 +68,6 @@
             popupDivs.forEach(function(div) {
                 if (div.textContent.includes('Open from') || 
                     div.textContent.includes('Browser') ||
-                    div.textContent.includes('Device') ||
-                    div.textContent.includes('URL')) {
                     div.style.display = 'none !important';
                     div.style.visibility = 'hidden !important';
                 }
