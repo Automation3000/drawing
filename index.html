@@ -36,24 +36,26 @@
                 logo.style.backgroundImage = 'url(\'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDEwMCAxMDAiPjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjUwIiBmaWxsPSIjZjU3YzAwIi8+PHBhdGggZD0iTTUwLDIwTDgwLDgwSDIwWiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==\')';
             }
             
-            // Hide ONLY the red-marked items - be very specific
-            var allMenuItems = document.querySelectorAll('td, div[role="menuitem"], .geMenuItem, .mxPopupMenuItem');
-            allMenuItems.forEach(function(item) {
-                var text = item.textContent.trim();
+            // Hide ONLY the red-marked items - check exact text match
+            if (document.querySelectorAll) {
+                // Target menu items by title attribute (most reliable)
+                var redItems = [
+                    '[title="Share..."]',
+                    '[title="Google Drive..."]',
+                    '[title="OneDrive..."]',
+                    '[title="Microsoft 365..."]',
+                    '[title="Dropbox..."]',
+                    '[title="GitHub..."]',
+                    '[title="GitLab..."]'
+                ];
                 
-                // Hide ONLY these specific RED items
-                if (text === 'Share...' || 
-                    text === 'Share' ||
-                    text === 'Google Drive...' || 
-                    text === 'OneDrive...' || 
-                    text === 'Microsoft 365...' ||
-                    text === 'Dropbox...' ||
-                    text === 'GitHub...' ||
-                    text === 'GitLab...') {
-                    item.style.display = 'none !important';
-                }
-            });
-            
+                redItems.forEach(function(selector) {
+                    var items = document.querySelectorAll(selector);
+                    items.forEach(function(item) {
+                        item.style.display = 'none !important';
+                    });
+                });
+            }
         }, 300);
         
         // Stop the interval after 30 seconds to avoid continuous polling
@@ -91,22 +93,21 @@
             display: none !important;
         }
 
-        /* ----- HIDE ONLY THE RED-MARKED ITEMS ----- */
+        /* ----- HIDE ONLY THE RED-MARKED ITEMS (BY TITLE ATTRIBUTE) ----- */
         
-        /* Hide Top Share Button */
-        .geBtn.gePrimaryBtn[title="Share"],
-        .geBtn[title="Share"] {
+        /* Hide Share button at top */
+        [title="Share"],
+        [title="Share..."] {
             display: none !important;
         }
         
-        /* Hide only specific RED cloud services - NOT the green ones (Browser, Device, URL) */
-        .geMenuItem[title="Google Drive..."],
-        .geMenuItem[title="OneDrive..."],
-        .geMenuItem[title="Microsoft 365..."],
-        .geMenuItem[title="Dropbox..."],
-        .geMenuItem[title="GitHub..."],
-        .geMenuItem[title="GitLab..."],
-        .geMenuItem[title="Share..."] {
+        /* Hide only the specific RED cloud services */
+        [title="Google Drive..."],
+        [title="OneDrive..."],
+        [title="Microsoft 365..."],
+        [title="Dropbox..."],
+        [title="GitHub..."],
+        [title="GitLab..."] {
             display: none !important;
         }
 
