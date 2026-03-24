@@ -36,24 +36,21 @@
                 logo.style.backgroundImage = 'url(\'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDEwMCAxMDAiPjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjUwIiBmaWxsPSIjZjU3YzAwIi8+PHBhdGggZD0iTTUwLDIwTDgwLDgwSDIwWiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==\')';
             }
             
-            // Hide only the red-marked items
-            var allMenuItems = document.querySelectorAll('.geMenuItem, .mxPopupMenuItem, [role="menuitem"]');
+            // Hide ONLY the red-marked items - be very specific
+            var allMenuItems = document.querySelectorAll('td, div[role="menuitem"], .geMenuItem, .mxPopupMenuItem');
             allMenuItems.forEach(function(item) {
                 var text = item.textContent.trim();
                 
-                // Hide ONLY these specific items
+                // Hide ONLY these specific RED items
                 if (text === 'Share...' || 
                     text === 'Share' ||
-                    text.includes('Google Drive') || 
-                    text.includes('OneDrive') || 
-                    text.includes('Microsoft 365') ||
-                    text.includes('Dropbox') ||
-                    text.includes('GitHub') ||
-                    text.includes('GitLab')) {
+                    text === 'Google Drive...' || 
+                    text === 'OneDrive...' || 
+                    text === 'Microsoft 365...' ||
+                    text === 'Dropbox...' ||
+                    text === 'GitHub...' ||
+                    text === 'GitLab...') {
                     item.style.display = 'none !important';
-                    item.style.visibility = 'hidden !important';
-                    item.style.height = '0 !important';
-                    item.style.overflow = 'hidden !important';
                 }
             });
             
@@ -94,7 +91,7 @@
             display: none !important;
         }
 
-        /* ----- HIDE ONLY RED-MARKED ITEMS ----- */
+        /* ----- HIDE ONLY THE RED-MARKED ITEMS ----- */
         
         /* Hide Top Share Button */
         .geBtn.gePrimaryBtn[title="Share"],
@@ -102,7 +99,7 @@
             display: none !important;
         }
         
-        /* Hide only specific sharing/cloud service options */
+        /* Hide only specific RED cloud services - NOT the green ones (Browser, Device, URL) */
         .geMenuItem[title="Google Drive..."],
         .geMenuItem[title="OneDrive..."],
         .geMenuItem[title="Microsoft 365..."],
