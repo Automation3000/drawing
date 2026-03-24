@@ -23,45 +23,6 @@
 	<script src="js/bootstrap.js"></script>
 	<script src="js/PreConfig.js"></script>
 
-	<script>
-        // Logo and branding update script
-        var cleanupInterval = setInterval(function() {
-            var logo = document.querySelector('.geAppIcon');
-            if (logo) {
-                // Update logo href and title
-                logo.setAttribute('href', 'https://draw.automation3000.com');
-                logo.setAttribute('title', 'Drawing');
-                
-                // Ensure background-image override is applied with orange icon
-                logo.style.backgroundImage = 'url(\'data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDEwMCAxMDAiPjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjUwIiBmaWxsPSIjZjU3YzAwIi8+PHBhdGggZD0iTTUwLDIwTDgwLDgwSDIwWiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==\')';
-            }
-            
-            // Hide ONLY the red-marked items - check exact text match
-            if (document.querySelectorAll) {
-                // Target menu items by title attribute (most reliable)
-                var redItems = [
-                    '[title="Share..."]',
-                    '[title="Google Drive..."]',
-                    '[title="OneDrive..."]',
-                    '[title="Microsoft 365..."]',
-                    '[title="Dropbox..."]',
-                    '[title="GitHub..."]',
-                    '[title="GitLab..."]'
-                ];
-                
-                redItems.forEach(function(selector) {
-                    var items = document.querySelectorAll(selector);
-                    items.forEach(function(item) {
-                        item.style.display = 'none !important';
-                    });
-                });
-            }
-        }, 300);
-        
-        // Stop the interval after 30 seconds to avoid continuous polling
-        setTimeout(function() { clearInterval(cleanupInterval); }, 30000);
-    </script>
-
 	<style type="text/css">
 		.geBlock {
 			z-index:-3;
@@ -76,41 +37,6 @@
 			margin-top:0px;
 			padding-top:0px;
 		}
-
-        /* ----- LOGO AND BRANDING OVERRIDES ----- */
-        
-        /* Replace draw.io logo with custom orange diagram icon */
-        .geAppIcon {
-            background-image: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz48c3ZnIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDEwMCAxMDAiPjxjaXJjbGUgY3g9IjUwIiBjeT0iNTAiIHI9IjUwIiBmaWxsPSIjZjU3YzAwIi8+PHBhdGggZD0iTTUwLDIwTDgwLDgwSDIwWiIgZmlsbD0iI2ZmZiIvPjwvc3ZnPg==') !important;
-            background-size: cover !important;
-            background-repeat: no-repeat !important;
-            background-position: center !important;
-        }
-
-        /* Hide draw.io branding elements in header/title bars */
-        div[title*="draw.io"],
-        span[title*="draw.io"] {
-            display: none !important;
-        }
-
-        /* ----- HIDE ONLY THE RED-MARKED ITEMS (BY TITLE ATTRIBUTE) ----- */
-        
-        /* Hide Share button at top */
-        [title="Share"],
-        [title="Share..."] {
-            display: none !important;
-        }
-        
-        /* Hide only the specific RED cloud services */
-        [title="Google Drive..."],
-        [title="OneDrive..."],
-        [title="Microsoft 365..."],
-        [title="Dropbox..."],
-        [title="GitHub..."],
-        [title="GitLab..."] {
-            display: none !important;
-        }
-
 	</style>
 </head>
 <body class="geEditor geClassic">
